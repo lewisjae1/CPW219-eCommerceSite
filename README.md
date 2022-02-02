@@ -1,3 +1,4 @@
+[![.NET](https://github.com/lewisjae1/CPW219-eCommerceSite/actions/workflows/dotnet.yml/badge.svg)](https://github.com/lewisjae1/CPW219-eCommerceSite/actions/workflows/dotnet.yml)
 # CPW219-eCommerceSite
 Class project demonstrating ASP.NET Core MVC Concepts.  
 This project will cover Entity Framework Core and the MVC concepts by building an eCommerce website.
