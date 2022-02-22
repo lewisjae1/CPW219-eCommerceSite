@@ -70,7 +70,7 @@ namespace CPW219_eCommerceSite.Controllers
             return View(gameModel);
         }
         
-                public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             Game? gameToDelete = await _context.Games.FindAsync(id);
             if(gameToDelete == null)
