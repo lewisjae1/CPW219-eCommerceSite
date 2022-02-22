@@ -1,4 +1,4 @@
-﻿using CPW219_eCommerceSite.Data;
+using CPW219_eCommerceSite.Data;
 using CPW219_eCommerceSite.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -43,7 +43,34 @@ namespace CPW219_eCommerceSite.Controllers
             return View(g);
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Edit(int id)
+        {
+            Game gameToEdit = await _context.Games.FindAsync(id);
+
+            if(gameToEdit == null)
+            {
+                return NotFound();
+            }
+
+            return View(gameToEdit);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Game gameModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Games.Update(gameModel);
+                await _context.SaveChangesAsync();
+
+                TempData["Message"] = $"{gameModel.Title} was updated successfully!";
+                return RedirectToAction("Index");
+            }
+
+            return View(gameModel);
+        }
+        
+                public async Task<IActionResult> Delete(int id)
         {
             Game? gameToDelete = await _context.Games.FindAsync(id);
             if(gameToDelete == null)
@@ -70,6 +97,5 @@ namespace CPW219_eCommerceSite.Controllers
             TempData["Message"] = "This game was already deleted";
             return RedirectToAction("Index");
         }
-            
     }
 }
