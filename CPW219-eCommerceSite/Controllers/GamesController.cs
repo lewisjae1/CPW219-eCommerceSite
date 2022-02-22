@@ -43,7 +43,7 @@ namespace CPW219_eCommerceSite.Controllers
             return View(g);
         }
 
-        public async Task<IActionResult> EditAsync(int id)
+        public async Task<IActionResult> Edit(int id)
         {
             Game gameToEdit = await _context.Games.FindAsync(id);
 
@@ -53,6 +53,20 @@ namespace CPW219_eCommerceSite.Controllers
             }
 
             return View(gameToEdit);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Game gameModel)
+        {
+            if (ModelState.IsValid)
+            {
+                _context.Games.Update(gameModel);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index");
+            }
+
+            return View(gameModel);
         }
     }
 }
