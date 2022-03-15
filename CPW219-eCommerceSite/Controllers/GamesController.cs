@@ -90,12 +90,24 @@ namespace CPW219_eCommerceSite.Controllers
             {
                 _context.Games.Remove(gameToDelete);
                 await _context.SaveChangesAsync();
-                TempData["Message"] = gameToDelete.Title + "was deleted successfully!";
+                TempData["Message"] = gameToDelete.Title + " was deleted successfully!";
                 return RedirectToAction("Index");
             }
 
             TempData["Message"] = "This game was already deleted";
             return RedirectToAction("Index");
+        }
+
+        public async Task<IActionResult> Details(int id)
+        {
+            Game? gameDetails = await _context.Games.FindAsync(id);
+
+            if(gameDetails == null)
+            {
+                return NotFound();
+            }
+
+            return View(gameDetails);
         }
     }
 }
